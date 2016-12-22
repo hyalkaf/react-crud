@@ -1,7 +1,7 @@
 import React from 'react';
 import CourseListRow from './CourseListRow';
 import {Link} from 'react-router';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class CourseList extends React.Component{
 
@@ -27,11 +27,19 @@ class CourseList extends React.Component{
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          <ReactCSSTransitionGroup
+            transitionName="course-item"
+            transitionLeave={true}
+            transitionAppear={true}
+            transitionAppearTimeout={2500}
+            transitionEnterTimeout={1700}
+            transitionLeaveTimeout={1000}
+            component="tbody"
+          >
             {this.props.courses.map(course =>
                 <CourseListRow key={course.id} course={course} removeCourse={this.props.removeCourse} />
             )}
-          </tbody>
+          </ReactCSSTransitionGroup>
         </table>
       </div>
     )
